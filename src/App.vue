@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style lang="scss"  type="text/css">
-//@import '../src/assets/scss/base_mixins/_base_mixins';
 
 @include min-base($label:false);
 

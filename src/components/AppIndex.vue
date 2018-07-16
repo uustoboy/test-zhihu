@@ -1,25 +1,35 @@
 <template>
   <div>
     <div class="a">
-      111
+      <IndexList/>
     </div>
   </div>
 </template>
 
 <script>
+import IndexList from './IndexList'
+
 export default {
   name: 'AppIndex',
+  components: {
+    IndexList
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created () {
+    this.$axios({
+      method: 'get',
+      url: 'https://news-at.zhihu.com/api/4/news/latest'
+    }).then((res){
+      console.log(res);
+    });
   }
+
 }
 </script>
 <style lang="scss" type="text/css">
-//@import '../assets/scss/base_mixins/_base_mixins';
-.a{
-  @include wh(100);
-  @include bgc(blue);
-}
+
 </style>
