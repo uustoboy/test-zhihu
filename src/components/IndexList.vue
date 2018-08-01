@@ -1,15 +1,13 @@
 <template>
   <div>
-    <ul class="zh-ul" v-for="item in homeList">
-      <li class="zh-list" >
-        <a>
-          <p class="list-txt">
-                {{ item.title }}
-          </p>
-          <div class="list-img" >
-            <img :src="item.images"/>
-          </div>
-        </a>
+    <ul class="zh-ul">
+      <li class="zh-list" v-for="item in homeList" :key="item.id" @click="Goto(item.id)">
+        <p class="list-txt">
+              {{ item.title }}
+        </p>
+        <div class="list-img" >
+          <img :src="item.images"/>
+        </div>
       </li>
     </ul>
   </div>
@@ -26,8 +24,18 @@ export default {
 
     }
   },
+  methods: {
+    Goto(id) {
+      this.$router.push({
+        name: 'DetailsPage',
+        query: {
+          id: id
+        }
+      });
+    }
+  },
   created () {
-    console.log(`homeList:${this.homeList}`);
+
   }
 }
 </script>
@@ -39,9 +47,8 @@ export default {
 .zh-list{
   @include pad(10 0);
   @include bdb(1 solid #ccc);
-  a{
-    @include flex;
-  }
+  @include flex;
+
   .list-txt{
     @include w(90%);
     @include mr(5);

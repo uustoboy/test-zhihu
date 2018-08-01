@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="a">
-      <IndexList :homeList='homeList' :msg='msg' />
-    </div>
+      <IndexList :homeList='homeList' />
   </div>
 </template>
 
@@ -16,8 +14,7 @@ export default {
   },
   data () {
     return {
-      homeList: {},
-      msg: 'Welcome to Your Vue.js App'
+      homeList: {}
     }
   },
   beforeCreate () {
@@ -25,9 +22,8 @@ export default {
   },
   created () {
     axios.get('/api/4/news/latest').then((res) => {
-      if(res.status == 200) {
-        this.homeList = res.data.stories;
-        console.log(typeof res.data.stories);
+      if (res.status === 200) {
+        this.homeList = res.data.stories
       }
     })
   }
