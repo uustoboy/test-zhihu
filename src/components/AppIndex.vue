@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="a">
-      <IndexList/>
+      <IndexList :homeList='homeList' :msg='msg' />
     </div>
   </div>
 </template>
 
 <script>
 import IndexList from './IndexList'
-
+import axios from 'axios'
 export default {
   name: 'AppIndex',
   components: {
@@ -16,16 +16,20 @@ export default {
   },
   data () {
     return {
+      homeList: {},
       msg: 'Welcome to Your Vue.js App'
     }
   },
+  beforeCreate () {
+
+  },
   created () {
-    this.$axios({
-      method: 'get',
-      url: 'https://news-at.zhihu.com/api/4/news/latest'
-    }).then((res){
-      console.log(res);
-    });
+    axios.get('/api/4/news/latest').then((res) => {
+      if(res.status == 200) {
+        this.homeList = res.data.stories;
+        console.log(typeof res.data.stories);
+      }
+    })
   }
 
 }

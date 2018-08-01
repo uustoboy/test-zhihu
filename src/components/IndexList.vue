@@ -1,16 +1,16 @@
 <template>
   <div>
-    <ul class="zh-ul">
-      <li class="zh-list">
+    <ul class="zh-ul" v-for="item in homeList">
+      <li class="zh-list" >
         <a>
           <p class="list-txt">
-            装修还是不能任性，本想搞「极简风」，结果满屋「廉价感
+                {{ item.title }}
           </p>
-          <div class="list-img">
-            <img src="https://pic3.zhimg.com/v2-0a7a20c7ea8fa67d70f7ad83b70bad7a.jpg"/>
+          <div class="list-img" >
+            <img :src="item.images"/>
           </div>
         </a>
-      </li>.
+      </li>
     </ul>
   </div>
 </template>
@@ -18,10 +18,16 @@
 <script>
 export default {
   name: 'IndexList',
+  props: [
+    'homeList'
+  ],
   data () {
     return {
 
     }
+  },
+  created () {
+    console.log(`homeList:${this.homeList}`);
   }
 }
 </script>
