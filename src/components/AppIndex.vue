@@ -30,6 +30,6 @@ export default {
 
 }
 </script>
-<style lang="scss" type="text/css">
+<style lang="scss" scoped type="text/css">
 
 </style>

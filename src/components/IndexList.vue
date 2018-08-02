@@ -25,13 +25,13 @@ export default {
     }
   },
   methods: {
-    Goto(id) {
+    Goto (id) {
       this.$router.push({
         name: 'DetailsPage',
         query: {
           id: id
         }
-      });
+      })
     }
   },
   created () {
@@ -39,9 +39,10 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped="" type="text/css">
+<style lang="scss" scoped type="text/css">
+$global-unit:rem;
 .zh-ul{
-  @include w(90%);
+  @include w(95%);
   @include mar(0 auto);
 }
 .zh-list{
@@ -52,11 +53,11 @@ export default {
   .list-txt{
     @include w(90%);
     @include mr(5);
-    @include flc(14,24,#000);
+    @include flc(18,32,#000);
     @include tal;
   }
   .list-img{
-    @include wh(100,50);
+    @include wh(150,100);
     img{
       @include wh(100%);
     }
