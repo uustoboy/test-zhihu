@@ -1,11 +1,11 @@
 <template>
   <div>
     <ul class="zh-ul">
-      <li class="zh-list" v-for="item in homeList" :key="item.id" @click="Goto(item.id)">
+      <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in homeList" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
               {{ item.title }}
         </p>
-        <div class="list-img" >
+        <div class="list-img" v-if="item.images">
           <img :src="item.images"/>
         </div>
       </li>
@@ -44,16 +44,20 @@ $global-unit:rem;
 .zh-ul{
   @include w(95%);
   @include mar(0 auto);
+
 }
 .zh-list{
-  @include pad(10 0);
-  @include bdb(1 solid #ccc);
+  @include pad(10);
   @include flex;
-
+  @include bgc(#fff);
+  @include bdrs(10);
+  @include over;
+  @include mar(0 0 20 0);
+  @include box-s;
   .list-txt{
     @include w(90%);
     @include mr(5);
-    @include flc(18,32,#000);
+    @include flc(22,36,#000);
     @include tal;
   }
   .list-img{

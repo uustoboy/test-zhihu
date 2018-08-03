@@ -12,7 +12,10 @@ export default new Router({
     {
       path: '/',
       name: 'AppIndex',
-      component: AppIndex
+      component: AppIndex,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/DetailsPage/',

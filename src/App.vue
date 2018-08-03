@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div class="navigation" @click="toggleShow">首页</div>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 
@@ -21,5 +25,12 @@ $global-unit:rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+body,html{
+  @include bgc(#f0f0f0);
+}
+.navigation{
+  @include fixed((l:5%,t:2%,z:10));
+  @include flcb(24,32,#887af5);
 }
 </style>
