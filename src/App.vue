@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="navigation" @click="toggleShow">首页</div>
+    <div class="navigation" >首页</div>
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>

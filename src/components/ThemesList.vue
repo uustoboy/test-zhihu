@@ -1,32 +1,27 @@
 <template>
   <div>
-    <transition >
-      <div class="themes-main" name="themes" v-if="themesShow">
+    <transition>
+      <div class="themes-main">
         <div class="themes-mark"></div>
         <ul class="themes-ul">
           <li class="themes-list">
             首页
           </li>
-          <li class="themes-list" v-for="(item,index) in themesList" :key="item.id">
+          <li class="themes-list" v-for="item in themesLists" :key="item.id">
               {{item.name}}
           </li>
         </ul>
       </div>
     </transition>
-
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 export default {
-  name: 'DetailsPage',
+  name: 'ThemesList',
   props: {
-    'themesList': [],
-    'themesShow': {
-      type: Boolean,
-      default: false
-    }
+    'themesLists': {}
   },
   components: {
 

@@ -1,13 +1,21 @@
 <template>
   <div>
+      <div>{{fullName}}</div>
       <IndexList :homeList='homeList' />
-      <ThemesList :themesList='themesList' :themesShow='' />
+      <ThemesList :themesLists='themesList' />
+
   </div>
 </template>
 
 <script>
 import IndexList from './IndexList'
 import ThemesList from './ThemesList'
+import {
+  mapState,
+  mapGetters,
+  mapActions,
+  mapMutations
+} from 'vuex'
 import axios from 'axios'
 export default {
   name: 'AppIndex',
@@ -24,8 +32,34 @@ export default {
   beforeCreate () {
 
   },
-  methods () {
+  mounted() {
 
+    // this.updateCountAsync({
+    //   num : 5,
+    //   time : 3000
+    // })
+    this['a/updateText'](123);
+    this['a/add']();
+    this['b/testAction']();
+    // let i = 1;
+    // setInterval(()=>{
+    //   this.$store.commit('updateCount',i++)
+    // },1000)
+  },
+  computed: {
+    ...mapState({
+      counter : 'count',
+      textA : state => state.a.text,
+      textC : state => state.c.text
+    }),
+    ...mapGetters({
+      'fullName' : 'fullName',
+      textPlus : 'a/textPlus'
+    })
+  },
+  methods: {
+    ...mapActions(['updateCountAsync','a/add','b/testAction']),
+    ...mapMutations(['updateCount','a/updateText'])
   },
   created () {
     axios.all([
@@ -36,11 +70,6 @@ export default {
       this.themesList = themesResp.data.others
     }))
 
-    // axios.get('/api/4/news/latest').then((res) => {
-    //   if (res.status === 200) {
-    //     this.homeList = res.data.stories
-    //   }
-    // })
   }
 
 }

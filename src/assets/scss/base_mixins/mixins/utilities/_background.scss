@@ -67,7 +67,7 @@
 			}
 		}
 	}@else{
-		background-color:unquote($color);
+		background-color:$color;
 	}
 }
 
