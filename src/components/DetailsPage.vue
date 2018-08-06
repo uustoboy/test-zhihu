@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import ReviewPage from './ReviewPage'
 export default {
   name: 'DetailsPage',
@@ -40,10 +39,10 @@ export default {
   },
   created () {
     let id = this.$route.query.id
-    axios.all([
-      axios.get(`/api/4/news/${id}`),
-      axios.get(`/api/4/story-extra/${id}`)
-    ]).then(axios.spread((detailsResp, reviewResp)=>{
+    this.axios.all([
+      this.axios.get(`/api/4/news/${id}`),
+      this.axios.get(`/api/4/story-extra/${id}`)
+    ]).then(this.axios.spread((detailsResp, reviewResp)=>{
       this.detailsList = detailsResp.data
       this.reviewInfo = reviewResp.data
       this.id = id

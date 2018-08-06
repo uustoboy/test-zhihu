@@ -1,24 +1,24 @@
 <template>
   <div>
-
-    <transition name="themes">
       <div class="themes-main" v-if="isThemes">
-        <div class="themes-mark"></div>
-        <ul class="themes-ul">
-          <li class="themes-list">
-            首页
-          </li>
-          <li class="themes-list" v-for="item in themesLists" :key="item.id">
-              {{item.name}}
-          </li>
-        </ul>
+        <transition name="mark">
+          <div class="themes-mark" @click="close()"></div>
+        </transition>
+         <transition name="themes">
+            <ul class="themes-ul">
+              <li class="themes-list">
+                首页
+              </li>
+              <li class="themes-list" v-for="item in themesLists" :key="item.id">
+                  {{item.name}}
+              </li>
+            </ul>
+          </transition>
       </div>
-    </transition>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import {
   mapState,
   mapGetters,
@@ -49,6 +49,12 @@ export default {
   },
   created () {
 
+  },
+  methods: {
+    ...mapMutations(['updateThemes']),
+    close(){
+      this.$store.commit('updateThemes',false)
+    }
   }
 
 }
@@ -56,7 +62,7 @@ export default {
 <style lang="scss"  type="text/css">
 $global-unit:rem;
 .themes-main{
-  @include fixed((l:0,t:0,w:100%,h:100%,z:30));
+  @include fixed((l:0,t:0,w:100%,h:100%,z:50));
 }
 .themes-mark{
   @include abs((l:0,t:0,w:100%,h:100%,z:30));
@@ -73,10 +79,18 @@ $global-unit:rem;
     @include ti(30);
   }
 }
+.mark-enter-active, .mark-leave-active {
+  transition: opacity 5s ease;
+}
+.mark-enter, .mark-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  @include opa(0);
+  transition: opacity 5s ease;
+}
 .themes-enter-active, .themes-leave-active {
-  transition: left 4.5s ease;
+  transition: left 0.3s ease;
 }
 .themes-enter, .themes-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  //@include l(0);
+  @include l(-100%);
+  transition: left 0.3s ease;
 }
 </style>

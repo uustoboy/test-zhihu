@@ -1,12 +1,5 @@
 <template>
   <div>
-      <!-- <div>{{fullName}}</div> -->
-      <button v-on:click="show = !show">
-      Toggle
-    </button>
-    <transition name="fade">
-      <p v-show="show">hello</p>
-    </transition>
       <IndexList :homeList='homeList' />
       <ThemesList :themesLists='themesList' />
 
@@ -22,7 +15,6 @@ import {
   mapActions,
   mapMutations
 } from 'vuex'
-import axios from 'axios'
 export default {
   name: 'AppIndex',
   components: {
@@ -69,10 +61,10 @@ export default {
     // ...mapMutations(['updateCount','a/updateText'])
   },
   created () {
-    axios.all([
-      axios.get(`/api/4/news/latest`),
-      axios.get(`/api/4/themes`)
-    ]).then(axios.spread((latestResp, themesResp)=>{
+    this.axios.all([
+      this.axios.get(`/api/4/news/latest`),
+      this.axios.get(`/api/4/themes`)
+    ]).then(this.axios.spread((latestResp, themesResp)=>{
       this.homeList = latestResp.data.stories
       this.themesList = themesResp.data.others
     }))
