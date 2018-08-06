@@ -1,5 +1,5 @@
 export default {
-    count : 1,
-    firstName : '123qwe',
-    lastName : 'Lou'
+  count: 1,
+  page: 0,
+  isThemes: false
 }

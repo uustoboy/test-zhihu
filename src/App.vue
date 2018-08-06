@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="navigation" >首页</div>
+    <div class="navigation" @click='toggleThemes()'>首页</div>
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
@@ -9,8 +9,23 @@
 </template>
 
 <script>
+import {
+  mapState,
+  mapGetters,
+  mapActions,
+  mapMutations
+} from 'vuex'
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    ...mapState(['isThemes'])
+  },
+  methods: {
+    ...mapMutations(['updateThemes']),
+    toggleThemes(){
+      this.$store.commit('updateThemes',!this.isThemes)
+    }
+  }
 }
 </script>
 
@@ -30,7 +45,7 @@ body,html{
   @include bgc(#f0f0f0);
 }
 .navigation{
-  @include fixed((l:5%,t:2%,z:10));
+  @include fixed((l:5%,t:2%,z:50));
   @include flcb(24,32,#887af5);
 }
 </style>

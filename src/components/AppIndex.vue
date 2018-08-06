@@ -1,6 +1,12 @@
 <template>
   <div>
-      <div>{{fullName}}</div>
+      <!-- <div>{{fullName}}</div> -->
+      <button v-on:click="show = !show">
+      Toggle
+    </button>
+    <transition name="fade">
+      <p v-show="show">hello</p>
+    </transition>
       <IndexList :homeList='homeList' />
       <ThemesList :themesLists='themesList' />
 
@@ -26,7 +32,8 @@ export default {
   data () {
     return {
       homeList: {},
-      themesList: {}
+      themesList: {},
+      show:true
     }
   },
   beforeCreate () {
@@ -38,28 +45,28 @@ export default {
     //   num : 5,
     //   time : 3000
     // })
-    this['a/updateText'](123);
-    this['a/add']();
-    this['b/testAction']();
+    // this['a/updateText'](123);
+    // this['a/add']();
+    // this['b/testAction']();
     // let i = 1;
     // setInterval(()=>{
     //   this.$store.commit('updateCount',i++)
     // },1000)
   },
   computed: {
-    ...mapState({
-      counter : 'count',
-      textA : state => state.a.text,
-      textC : state => state.c.text
-    }),
-    ...mapGetters({
-      'fullName' : 'fullName',
-      textPlus : 'a/textPlus'
-    })
+    // ...mapState({
+    //   counter : 'count',
+    //   textA : state => state.a.text,
+    //   textC : state => state.c.text
+    // }),
+    //...mapGetters({
+      //'fullName' : 'fullName',
+      // textPlus : 'a/textPlus'
+    //})
   },
   methods: {
-    ...mapActions(['updateCountAsync','a/add','b/testAction']),
-    ...mapMutations(['updateCount','a/updateText'])
+    // ...mapActions(['updateCountAsync','a/add','b/testAction']),
+    // ...mapMutations(['updateCount','a/updateText'])
   },
   created () {
     axios.all([

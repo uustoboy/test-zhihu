@@ -1,7 +1,8 @@
 <template>
   <div>
-    <transition>
-      <div class="themes-main">
+
+    <transition name="themes">
+      <div class="themes-main" v-if="isThemes">
         <div class="themes-mark"></div>
         <ul class="themes-ul">
           <li class="themes-list">
@@ -18,6 +19,12 @@
 
 <script>
 import axios from 'axios'
+import {
+  mapState,
+  mapGetters,
+  mapActions,
+  mapMutations
+} from 'vuex'
 export default {
   name: 'ThemesList',
   props: {
@@ -37,6 +44,9 @@ export default {
   beforeCreate () {
 
   },
+  computed: {
+    ...mapState(['isThemes'])
+  },
   created () {
 
   }
@@ -46,10 +56,10 @@ export default {
 <style lang="scss"  type="text/css">
 $global-unit:rem;
 .themes-main{
-  @include fixed((l:-100%,t:0,w:100%,h:100%,z:30));
+  @include fixed((l:0,t:0,w:100%,h:100%,z:30));
 }
 .themes-mark{
-  @include abs((l:0%,t:0,w:100%,h:100%,z:30));
+  @include abs((l:0,t:0,w:100%,h:100%,z:30));
   @include bgc(rgba(0,0,0,0.5));
 }
 .themes-ul{
@@ -63,12 +73,10 @@ $global-unit:rem;
     @include ti(30);
   }
 }
-
 .themes-enter-active, .themes-leave-active {
-  @include trs(left 100% ease-out);
+  transition: left 4.5s ease;
 }
-
-.themes-enter, .themes-leave-to {
-   @include trs(left -100% ease-out);
+.themes-enter, .themes-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  //@include l(0);
 }
 </style>
