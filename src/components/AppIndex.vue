@@ -2,13 +2,14 @@
   <div>
       <IndexList :homeList='homeList' />
       <ThemesList :themesLists='themesList' />
-
+      <BackTop />
   </div>
 </template>
 
 <script>
 import IndexList from './IndexList'
 import ThemesList from './ThemesList'
+import BackTop from './BackTop'
 import {
   mapState,
   mapGetters,
@@ -19,7 +20,8 @@ export default {
   name: 'AppIndex',
   components: {
     IndexList,
-    ThemesList
+    ThemesList,
+    BackTop
   },
   data () {
     return {
@@ -32,7 +34,7 @@ export default {
 
   },
   mounted() {
-
+    console.log(this.$el)
     // this.updateCountAsync({
     //   num : 5,
     //   time : 3000
@@ -61,6 +63,7 @@ export default {
     // ...mapMutations(['updateCount','a/updateText'])
   },
   created () {
+
     this.axios.all([
       this.axios.get(`/api/4/news/latest`),
       this.axios.get(`/api/4/themes`)

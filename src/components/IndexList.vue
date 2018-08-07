@@ -32,9 +32,17 @@ export default {
           id: id
         }
       })
+    },
+    scrollToTop(){
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+　　   console.log(scrollTop)
     }
   },
+  mounted(){
+    window.addEventListener('scroll', this.scrollToTop)
+  },
   created () {
+
 
   }
 }
