@@ -34,12 +34,12 @@ export default {
       })
     },
     scrollToTop(){
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-　　   console.log(scrollTop)
+//       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+// 　　   console.log(scrollTop)
     }
   },
   mounted(){
-    window.addEventListener('scroll', this.scrollToTop)
+    // window.addEventListener('scroll', this.scrollToTop)
   },
   created () {
 

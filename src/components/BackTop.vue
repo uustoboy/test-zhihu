@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="back-top" @click="goBack()">返回</div>
+    <div v-show="goGack" class="back-top" @click="goBack()">返回</div>
   </div>
 </template>
 
@@ -13,7 +13,8 @@ export default {
   },
   data () {
     return {
-
+      goGack : false,
+      scrollTop : 0
     }
   },
   activated () {
@@ -23,7 +24,11 @@ export default {
 
   },
   mounted(){
-    window.addEventListener('scroll', this.scrollToTop)
+    this.$nextTick(function () {
+      //修改事件监听
+      window.addEventListener('scroll', this.scrollToTop)
+
+    })
   },
   created () {
 
@@ -31,14 +36,47 @@ export default {
   methods: {
     goBack () {
 
+      let time
+      let _that = this;
+      let timer = null;
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+      clearTimeout(timer)
+
+      timer = setTimeout(function render(){
+
+        if( _that.scrollTop > 0 ){
+           _that.scrollTop -= 50
+          document.body.scrollTop = document.documentElement.scrollTop = _that.scrollTop
+          timer  = setTimeout(render)
+
+        }else {
+          clearTimeout(timer)
+          _that.goGack = false
+        }
+        // window.requestAnimationFrame();
+
+
+      },300);
+
+
+
+
+
+
     },
     scrollToTop(){
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       if( scrollTop > 20 ){
-
+        this.goGack = true;
+      }else{
+        this.goGack = false;
       }
-　　   console.log(scrollTop)
+　　
     }
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.scrollToTop)
   }
 
 }

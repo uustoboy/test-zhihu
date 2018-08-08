@@ -14,6 +14,7 @@
       <div v-html='detailsList.body' class="details-main">
       </div>
       <ReviewPage :reviewInfo="reviewInfo" :id="id" />
+      <BackTop />
   </div>
 </template>
 

@@ -41,6 +41,8 @@ $global-unit:rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  @include maw(640);
+  @include mar(0 auto);
 }
 body,html{
   @include bgc(#f0f0f0);

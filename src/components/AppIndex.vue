@@ -34,7 +34,7 @@ export default {
 
   },
   mounted() {
-    console.log(this.$el)
+    //console.log(this.$el)
     // this.updateCountAsync({
     //   num : 5,
     //   time : 3000

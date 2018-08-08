@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import BackTop from './components/BackTop'
 
 import store from './store/store'
 
@@ -13,6 +14,7 @@ Vue.use(VueAxios, axios)
 // Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
+Vue.component('BackTop', BackTop)
 
 Vue.filter('turnTime', (val) => {
   let date = new Date(val * 1000)// 时间戳为10位需*1000，时间戳为13位的话不需乘1000
