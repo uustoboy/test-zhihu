@@ -9,7 +9,7 @@
               <li class="themes-list">
                 首页
               </li>
-              <li class="themes-list" v-for="item in themesLists" :key="item.id">
+              <li class="themes-list" v-for="item in themesLists" :key="item.id" @click="goThemes(item.id)">
                   {{item.name}}
               </li>
             </ul>
@@ -54,6 +54,9 @@ export default {
     ...mapMutations(['updateThemes']),
     close(){
       this.$store.commit('updateThemes',false)
+    },
+    goThemes(id){
+      console.log(id)
     }
   }
 

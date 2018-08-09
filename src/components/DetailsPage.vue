@@ -171,11 +171,9 @@ $global-unit:rem;
       text-align: center;
       margin-bottom: 0.5rem;
       a {
-          z-index: 1;
           @include block;
           @include bgc(#ccc);
           @include hflc(50,20,50,#fff);
-          position: relative;
           @include cur;
           @include bdrs(10);
       }

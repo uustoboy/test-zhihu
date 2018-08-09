@@ -3,6 +3,7 @@
     <div class="review-column">
       <div class="review-comment" @click="Goto(id)">评论 {{reviewInfo.comments}}</div>
       <div class="review-praise">点赞 {{reviewInfo.popularity}}</div>
+
     </div>
   </div>
 </template>

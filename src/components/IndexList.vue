@@ -1,7 +1,27 @@
 <template>
   <div>
+    <div v-if="homeList.top_stories">
+      <Swiper>
+        <div class="swiper-slide" v-for="item in homeList.top_stories" :key="item.id" slot="swiper-con" @click="Goto(item.id)">
+          <div clss="top-storiesList">
+            <img :src="item.image" class="top-storiesImg">
+            <p class="top-storiesTxt">{{item.title}}</p>
+          </div>
+        </div>
+      </Swiper>
+    </div>
+    <div v-if="homeList.description">
+        <img :src="homeList.image" />
+        <p>{{homeList.description}}</p>
+    </div>
+    <div v-if="homeList.editors">
+      主编：
+      <span v-for="item in homeList.editors" :key="item.id" >
+        <img :src="item.avatar">
+      </span>
+    </div>
     <ul class="zh-ul">
-      <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in homeList" :key="item.id" @click="Goto(item.id)">
+      <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in homeList.stories" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
               {{ item.title }}
         </p>
@@ -14,8 +34,12 @@
 </template>
 
 <script>
+import Swiper from './swipe/Swiper'
 export default {
   name: 'IndexList',
+  components: {
+    Swiper
+  },
   props: [
     'homeList'
   ],
@@ -49,9 +73,26 @@ export default {
 </script>
 <style lang="scss" scoped type="text/css">
 $global-unit:rem;
+
+.swiper-slide{
+  @include rel;
+}
+.top-storiesTxt{
+  @include flex;
+  @include abs((l:0,b:8%));
+  @include flc(24,34,#fff);
+  @include tal;
+  @include pad(20);
+}
+.top-storiesImg{
+  @include wh(640,480);
+}
+.top-storiesList{
+  @include rel;
+}
 .zh-ul{
   @include w(95%);
-  @include mar(0 auto);
+  @include mar(30 auto);
 
 }
 .zh-list{

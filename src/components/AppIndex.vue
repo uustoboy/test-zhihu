@@ -68,8 +68,9 @@ export default {
       this.axios.get(`/api/4/news/latest`),
       this.axios.get(`/api/4/themes`)
     ]).then(this.axios.spread((latestResp, themesResp)=>{
-      this.homeList = latestResp.data.stories
+      this.homeList = latestResp.data
       this.themesList = themesResp.data.others
+      console.log(latestResp);
     }))
 
   }

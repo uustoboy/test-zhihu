@@ -84,10 +84,11 @@ export default {
 <style lang="scss"  type="text/css">
 $global-unit:rem;
 .back-top{
-  @include fixed((r:2%,b:2%,w:60,h:60));
+  @include fixed((r:2%,b:7%,w:60,h:60));
   @include flc(22,60,#333);
   @include bgc(yellow);
   @include bdrs(10);
   @include tac;
+  @include cur;
 }
 </style>
