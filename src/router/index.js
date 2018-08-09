@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import AppIndex from '@/components/AppIndex'
 import DetailsPage from '@/components/DetailsPage'
 import ReviewDetails from '@/components/ReviewDetails'
+import ThemesIndex from '@/components/ThemesIndex'
+import IndexList from '@/components/IndexList'
 import Vuex from 'vuex'
 
 import createStore from '../store/store'
@@ -22,12 +24,26 @@ const store = createStore()
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/AppIndex',
+      redirect:'/',
       name: 'AppIndex',
       component: AppIndex,
       meta: {
         keepAlive: true
-      }
+      },
+      children: [
+        {
+          path: '/IndexList',
+          name: 'IndexList',
+          component: IndexList
+        },
+        {
+          path: '/ThemesIndex',
+          name: 'ThemesIndex',
+          component: ThemesIndex
+        }
+      ],
+      redirect: '/IndexList'
     },
     {
       path: '/DetailsPage/',

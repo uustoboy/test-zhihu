@@ -1,6 +1,7 @@
 <template>
   <div>
-      <IndexList :homeList='homeList' />
+      <!--<IndexList :homeList='homeList' />-->
+      <router-view></router-view>
       <ThemesList :themesLists='themesList' />
       <BackTop />
   </div>
@@ -65,12 +66,12 @@ export default {
   created () {
 
     this.axios.all([
-      this.axios.get(`/api/4/news/latest`),
+
       this.axios.get(`/api/4/themes`)
-    ]).then(this.axios.spread((latestResp, themesResp)=>{
-      this.homeList = latestResp.data
+    ]).then(this.axios.spread((themesResp)=>{
+
       this.themesList = themesResp.data.others
-      console.log(latestResp);
+
     }))
 
   }

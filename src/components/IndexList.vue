@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="homeList.top_stories">
+    <div v-if="latestList.top_stories">
       <Swiper>
-        <div class="swiper-slide" v-for="item in homeList.top_stories" :key="item.id" slot="swiper-con" @click="Goto(item.id)">
+        <div class="swiper-slide" v-for="item in latestList.top_stories" :key="item.id" slot="swiper-con" @click="Goto(item.id)">
           <div clss="top-storiesList">
             <img :src="item.image" class="top-storiesImg">
             <p class="top-storiesTxt">{{item.title}}</p>
@@ -10,18 +10,8 @@
         </div>
       </Swiper>
     </div>
-    <div v-if="homeList.description">
-        <img :src="homeList.image" />
-        <p>{{homeList.description}}</p>
-    </div>
-    <div v-if="homeList.editors">
-      主编：
-      <span v-for="item in homeList.editors" :key="item.id" >
-        <img :src="item.avatar">
-      </span>
-    </div>
     <ul class="zh-ul">
-      <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in homeList.stories" :key="item.id" @click="Goto(item.id)">
+      <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in latestList.stories" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
               {{ item.title }}
         </p>
@@ -40,12 +30,9 @@ export default {
   components: {
     Swiper
   },
-  props: [
-    'homeList'
-  ],
   data () {
     return {
-
+      latestList : ''
     }
   },
   methods: {
@@ -67,6 +54,10 @@ export default {
   },
   created () {
 
+      this.axios.get(`/api/4/news/latest`).then((latestResp)=>{
+        this.latestList = latestResp.data
+        console.log(this.latestList.top_stories);
+      })
 
   }
 }
