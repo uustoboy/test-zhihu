@@ -29,7 +29,7 @@ export default {
 
   },
   mounted(){
-
+    console.log(11)
     var mySwiper = new Swiper('.swiper-container', {
                                   autoplay: 5000,
                                  	//分页器
@@ -38,7 +38,7 @@ export default {
                               })
   },
   created () {
-
+    console.log(11)
   },
   methods: {
 

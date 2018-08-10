@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div v-if="latestList.top_stories">
       <Swiper>
         <div class="swiper-slide" v-for="item in latestList.top_stories" :key="item.id" slot="swiper-con" @click="Goto(item.id)">
@@ -20,6 +21,16 @@
         </div>
       </li>
     </ul>
+    <ul v-if="beforeList">
+      <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in beforeList" :key="item.id" @click="Goto(item.id)">
+        <p class="list-txt">
+              {{ item.title }}
+        </p>
+        <div class="list-img" v-if="item.images">
+          <img :src="item.images"/>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -32,7 +43,10 @@ export default {
   },
   data () {
     return {
-      latestList : ''
+      latestList : '',
+      scrollBtn : false,
+      scrollData : this.getNowFormatDate(),
+      beforeList : []
     }
   },
   methods: {
@@ -45,18 +59,44 @@ export default {
       })
     },
     scrollToTop(){
-//       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-// 　　   console.log(scrollTop)
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      let bodyH = document.body.offsetHeight
+      let winH = document.documentElement.clientHeight
+
+
+       if( bodyH+winH > bodyH-20 && !this.scrollBtn ){
+        let data = this.scrollData;
+        this.axios.get(`/api/4/news/before/${data}`).then((resp) => {
+          console.log(resp.data);
+          this.beforeList = this.beforeList.concat(this.beforeList,resp.data.stories)
+          this.scrollBtn = false
+          this.scrollData = resp.data.date
+          console.log(this.beforeList);
+        })
+       }
+    },
+    getNowFormatDate () {
+      var date = new Date()
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+          month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+      }
+      var currentdate = date.getFullYear() + month + strDate;
+      return currentdate;
     }
   },
   mounted(){
-    // window.addEventListener('scroll', this.scrollToTop)
+    window.addEventListener('scroll', this.scrollToTop)
   },
   created () {
 
-      this.axios.get(`/api/4/news/latest`).then((latestResp)=>{
+      this.axios.get(`/api/4/news/latest`).then((latestResp) => {
         this.latestList = latestResp.data
-        console.log(this.latestList.top_stories);
+        console.log(this.latestList.top_stories)
       })
 
   }

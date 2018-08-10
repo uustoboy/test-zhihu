@@ -58,7 +58,7 @@ export default {
     goThemes(id){
       console.log(id)
       this.$router.push({
-        name: 'AppIndex/ThemesIndex',
+        name: '/AppIndex/ThemesIndex',
         query: {
           id: id
         }

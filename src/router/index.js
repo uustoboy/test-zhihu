@@ -22,10 +22,11 @@ const store = createStore()
 // })
 
 export default new Router({
+  mode: 'hash',
   routes: [
     {
-      path: '/AppIndex',
-      redirect:'/',
+      path: '/',
+      redirect: 'AppIndex',
       name: 'AppIndex',
       component: AppIndex,
       meta: {
