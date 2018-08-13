@@ -21,7 +21,7 @@
         </div>
       </li>
     </ul>
-    <ul v-if="beforeList">
+    <ul  class="zh-ul" v-if="beforeList">
       <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in beforeList" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
               {{ item.title }}
@@ -62,16 +62,16 @@ export default {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       let bodyH = document.body.offsetHeight
       let winH = document.documentElement.clientHeight
+      let that = this
 
-
-       if( bodyH+winH > bodyH-20 && !this.scrollBtn ){
-        let data = this.scrollData;
+       if( scrollTop+winH > bodyH-10 && !this.scrollBtn ){
+        this.scrollBtn = true
+        let data = this.scrollData
         this.axios.get(`/api/4/news/before/${data}`).then((resp) => {
-          console.log(resp.data);
-          this.beforeList = this.beforeList.concat(this.beforeList,resp.data.stories)
-          this.scrollBtn = false
-          this.scrollData = resp.data.date
-          console.log(this.beforeList);
+          console.log(typeof resp.data.stories)
+          that.beforeList = [...that.beforeList,...resp.data.stories]
+          that.scrollData = resp.data.date
+          that.scrollBtn = false
         })
        }
     },
