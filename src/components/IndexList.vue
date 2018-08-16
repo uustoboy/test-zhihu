@@ -11,6 +11,7 @@
         </div>
       </Swiper>
     </div>
+    <div class="zh-h2">今日热闻</div>
     <ul class="zh-ul">
       <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in latestList.stories" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
@@ -21,16 +22,20 @@
         </div>
       </li>
     </ul>
-    <ul  class="zh-ul" v-if="beforeList">
-      <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in beforeList" :key="item.id" @click="Goto(item.id)">
-        <p class="list-txt">
-              {{ item.title }}
-        </p>
-        <div class="list-img" v-if="item.images">
-          <img :src="item.images"/>
-        </div>
-      </li>
-    </ul>
+    <div v-for="item in beforeList" :key="item.id">
+      <div class="zh-h2">{{item.date | getDateWeek }}</div>
+      <ul  class="zh-ul" >
+        <li :class="jtem.images ? 'zh-list' : 'zh-list2'" v-for="jtem in item.stories" :key="jtem.id" @click="Goto(jtem.id)">
+          <p class="list-txt">
+                {{ jtem.title }}
+          </p>
+          <div class="list-img" v-if="jtem.images">
+            <img :src="jtem.images"/>
+          </div>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
@@ -68,9 +73,11 @@ export default {
         this.scrollBtn = true
         let data = this.scrollData
         this.axios.get(`/api/4/news/before/${data}`).then((resp) => {
-          console.log(typeof resp.data.stories)
-          that.beforeList = [...that.beforeList,...resp.data.stories]
+
+          //that.beforeList = [...that.beforeList,...resp.data]
+          that.beforeList.push(resp.data)
           that.scrollData = resp.data.date
+          console.log(resp.data);
           that.scrollBtn = false
         })
        }
@@ -87,7 +94,8 @@ export default {
       }
       var currentdate = date.getFullYear() + month + strDate;
       return currentdate;
-    }
+    },
+
   },
   mounted(){
     window.addEventListener('scroll', this.scrollToTop)
@@ -99,6 +107,30 @@ export default {
         console.log(this.latestList.top_stories)
       })
 
+  },
+  filters: {
+    getDateWeek: function (value) {
+      if (!value) return ''
+
+      let year = value.slice(0,4)
+      let month = value.slice(4,6)
+      let day = value.slice(6,8)
+      let spellDay = `${year}-${month}-${day}`
+      let week = getWeek(spellDay)
+      return `${month}月${day} ${week}`
+      function getWeek(date) {
+          var week;
+          date = new Date(date)
+          if(date.getDay() == 0) week = "星期日"
+          if(date.getDay() == 1) week = "星期一"
+          if(date.getDay() == 2) week = "星期二"
+          if(date.getDay() == 3) week = "星期三"
+          if(date.getDay() == 4) week = "星期四"
+          if(date.getDay() == 5) week = "星期五"
+          if(date.getDay() == 6) week = "星期六"
+          return week;
+      }
+    }
   }
 }
 </script>
@@ -121,9 +153,14 @@ $global-unit:rem;
 .top-storiesList{
   @include rel;
 }
+.zh-h2{
+  @include pad(20);
+  @include flc(22,24,#333);
+  @include tal;
+}
 .zh-ul{
   @include w(95%);
-  @include mar(30 auto);
+  @include mar(0 auto);
 
 }
 .zh-list{
@@ -134,6 +171,9 @@ $global-unit:rem;
   @include over;
   @include mar(0 0 20 0);
   @include box-s;
+  &:last-child{
+    @include mar(0);
+  }
   .list-txt{
     @include w(90%);
     @include mr(5);
