@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <div class="navigation" @click='toggleThemes()'>首页</div>
+    <div v-if="honePage" class="navigation" @click='toggleThemes()'>首页</div>
+    <div v-else class="navigation navigation-back" @click='goBack()'>返回</div>
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
@@ -18,12 +19,24 @@ import {
 export default {
   name: 'App',
   computed: {
-    ...mapState(['isThemes'])
+    ...mapState(['isThemes','honePage'])
   },
   methods: {
     ...mapMutations(['updateThemes']),
     toggleThemes(){
       this.$store.commit('updateThemes',!this.isThemes)
+    },
+    goBack(){
+       console.log(1);
+      if (window.history.length <= 1) {
+
+          this.$router.push({path:'/'})
+          this.$store.commit('updateHomePage',true)
+          return false
+      } else {
+          this.$router.go(-1)
+      }
+
     }
 
   }
@@ -50,5 +63,8 @@ body,html{
 .navigation{
   @include fixed((l:5%,t:2%,z:50));
   @include flcb(24,32,#887af5);
+}
+.navigation-back{
+  @include c(red);
 }
 </style>

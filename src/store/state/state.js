@@ -1,5 +1,6 @@
 export default {
   count: 1,
   page: 0,
-  isThemes: false
+  isThemes: false,
+  honePage: true
 }

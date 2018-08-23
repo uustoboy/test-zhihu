@@ -56,12 +56,14 @@ export default {
   },
   methods: {
     Goto (id) {
+
       this.$router.push({
         name: 'DetailsPage',
         query: {
           id: id
         }
       })
+      this.$store.commit('updateHomePage',false)
     },
     scrollToTop(){
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop

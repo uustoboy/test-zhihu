@@ -5,5 +5,8 @@ export default {
   updateThemes (state, data) {
     console.log(data)
     state.isThemes = data
+  },
+  updateHomePage (state, data) {
+    state.honePage = data
   }
 }

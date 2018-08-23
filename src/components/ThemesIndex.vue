@@ -50,7 +50,7 @@ export default {
 
   },
   computed: {
-
+     ...mapState(['honePage'])
   },
   created () {
       let id = this.$route.query.id

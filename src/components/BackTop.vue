@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="goGack" class="back-top" @click="goBack()">返回</div>
+    <div v-show="goGack" class="back-top" @click="goBack()">顶部</div>
   </div>
 </template>
 
