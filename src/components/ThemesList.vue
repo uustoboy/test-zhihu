@@ -48,14 +48,14 @@ export default {
     ...mapState(['isThemes'])
   },
   created () {
-    console.log(1111);
+    console.log(1111)
   },
   methods: {
     ...mapMutations(['updateThemes']),
-    close(){
-      this.$store.commit('updateThemes',false)
+    close () {
+      this.$store.commit('updateThemes', false)
     },
-    goThemes(id){
+    goThemes (id) {
       console.log(id)
       this.$router.push({
         path: '/IndexList',

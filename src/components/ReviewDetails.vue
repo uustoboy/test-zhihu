@@ -106,15 +106,14 @@ export default {
       if (this.reviewInfo.comments > 0) {
         this.shortLength = true
       }
-
     }))
   },
   methods: {
     getShortList () {
       let id = this.$route.query.id
-      axios.get(`/api/4/story/${id}/short-comments`).then( (shortResp) => {
+      axios.get(`/api/4/story/${id}/short-comments`).then((shortResp) => {
         this.reviewShort = shortResp.data.comments
-      });
+      })
     }
 
   }

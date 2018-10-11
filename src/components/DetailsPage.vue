@@ -29,7 +29,7 @@ export default {
     return {
       detailsList: '',
       reviewInfo: '',
-      id:''
+      id: ''
     }
   },
   activated () {
@@ -43,12 +43,11 @@ export default {
     this.axios.all([
       this.axios.get(`/api/4/news/${id}`),
       this.axios.get(`/api/4/story-extra/${id}`)
-    ]).then(this.axios.spread((detailsResp, reviewResp)=>{
+    ]).then(this.axios.spread((detailsResp, reviewResp) => {
       this.detailsList = detailsResp.data
       this.reviewInfo = reviewResp.data
       this.id = id
     }))
-
   }
 
 }

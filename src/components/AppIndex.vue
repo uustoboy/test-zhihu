@@ -35,7 +35,7 @@ export default {
 
   },
   mounted () {
-    //console.log(this.$el)
+    // console.log(this.$el)
     // this.updateCountAsync({
     //   num : 5,
     //   time : 3000
@@ -54,26 +54,22 @@ export default {
     //   textA : state => state.a.text,
     //   textC : state => state.c.text
     // }),
-    //...mapGetters({
-      //'fullName' : 'fullName',
-      // textPlus : 'a/textPlus'
-    //})
+    // ...mapGetters({
+    // 'fullName' : 'fullName',
+    // textPlus : 'a/textPlus'
+    // })
   },
   methods: {
     // ...mapActions(['updateCountAsync','a/add','b/testAction']),
     // ...mapMutations(['updateCount','a/updateText'])
   },
   created () {
-
     this.axios.all([
 
       this.axios.get(`/api/4/themes`)
-    ]).then(this.axios.spread((themesResp)=>{
-
+    ]).then(this.axios.spread((themesResp) => {
       this.themesList = themesResp.data.others
-
     }))
-
   }
 
 }

@@ -39,7 +39,7 @@ export default {
   },
   data () {
     return {
-        themeList: {}
+      themeList: {}
     }
   },
   activated () {
@@ -49,16 +49,16 @@ export default {
 
   },
   computed: {
-     ...mapState(['honePage'])
+    ...mapState(['honePage'])
   },
   created () {
-      let id = this.$route.query.id
-        this.axios.all([
-        this.axios.get(`/api/4/theme/${id}`)
-        ]).then(this.axios.spread((themeResp, reviewResp)=>{
-        this.themeList = themeResp.data
-        this.id = id
-        }))
+    let id = this.$route.query.id
+    this.axios.all([
+      this.axios.get(`/api/4/theme/${id}`)
+    ]).then(this.axios.spread((themeResp, reviewResp) => {
+      this.themeList = themeResp.data
+      this.id = id
+    }))
   },
   methods: {
 
@@ -68,9 +68,6 @@ export default {
 </script>
 <style lang="scss"  type="text/css">
 $global-unit:rem;
-
-
-
 
 .top-storiesTxt{
   @include flex;

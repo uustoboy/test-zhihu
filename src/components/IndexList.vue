@@ -47,106 +47,101 @@ export default {
   },
   data () {
     return {
-      latestList : '',
-      scrollBtn : false,
-      scrollData : this.getNowFormatDate(),
-      beforeList : []
+      latestList: '',
+      scrollBtn: false,
+      scrollData: this.getNowFormatDate(),
+      beforeList: []
     }
   },
   methods: {
     Goto (id) {
-
       this.$router.push({
         name: 'DetailsPage',
         query: {
           id: id
         }
       })
-      this.$store.commit('updateHomePage',false)
+      this.$store.commit('updateHomePage', false)
     },
-    scrollToTop(){
+    scrollToTop () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       let bodyH = document.body.offsetHeight
       let winH = document.documentElement.clientHeight
       let that = this
 
-       if( scrollTop+winH > bodyH-10 && !this.scrollBtn ){
+      if (scrollTop + winH > bodyH - 10 && !this.scrollBtn) {
         this.scrollBtn = true
         let data = this.scrollData
-        console.log(data);
+        console.log(data)
         this.axios.get(`/api/4/news/before/${data}`).then((resp) => {
-
-          //that.beforeList = [...that.beforeList,...resp.data]
+          // that.beforeList = [...that.beforeList,...resp.data]
           that.beforeList.push(resp.data)
           that.scrollData = resp.data.date
-          console.log(resp.data);
+          console.log(resp.data)
           that.scrollBtn = false
         })
-       }
+      }
     },
     getNowFormatDate () {
       var date = new Date()
-      var month = date.getMonth() + 1;
-      var strDate = date.getDate();
+      var month = date.getMonth() + 1
+      var strDate = date.getDate()
       if (month >= 1 && month <= 9) {
-          month = "0" + month;
+        month = '0' + month
       }
       if (strDate >= 0 && strDate <= 9) {
-          strDate = "0" + strDate;
+        strDate = '0' + strDate
       }
-      var currentdate = `${date.getFullYear()}${month}${strDate}`;
+      var currentdate = `${date.getFullYear()}${month}${strDate}`
       console.log(currentdate)
-      return currentdate;
-    },
+      return currentdate
+    }
 
   },
-  mounted(){
+  mounted () {
     window.addEventListener('scroll', this.scrollToTop)
 
     let id = this.$route.query.id
 
-    if(id){
-      console.log('id:idsdsd');
+    if (id) {
+      console.log('id:idsdsd')
       this.axios.all([
         this.axios.get(`/api/4/theme/${id}`)
-        ]).then(this.axios.spread((themeResp, reviewResp)=>{
+      ]).then(this.axios.spread((themeResp, reviewResp) => {
         this.latestList = themeResp.data
         this.id = id
-        }))
-    }else{
+      }))
+    } else {
       this.axios.get(`/api/4/news/latest`).then((latestResp) => {
         this.latestList = latestResp.data
-       // console.log(this.latestList.top_stories)
+        // console.log(this.latestList.top_stories)
       })
     }
-
-
-
   },
-  created(){
+  created () {
 
   },
   filters: {
     getDateWeek: function (value) {
       if (!value) return ''
 
-      let year = value.slice(0,4)
-      let month = value.slice(4,6)
-      let day = value.slice(6,8)
+      let year = value.slice(0, 4)
+      let month = value.slice(4, 6)
+      let day = value.slice(6, 8)
       let spellDay = `${year}-${month}-${day}`
       let week = getWeek(spellDay)
       return `${month}月${day} ${week}`
-      function getWeek(date) {
-          var week;
-          date = new Date(date)
-          if(date.getDay() == 0) week = "星期日"
-          if(date.getDay() == 1) week = "星期一"
-          if(date.getDay() == 2) week = "星期二"
-          if(date.getDay() == 3) week = "星期三"
-          if(date.getDay() == 4) week = "星期四"
-          if(date.getDay() == 5) week = "星期五"
-          if(date.getDay() == 6) week = "星期六"
-          return week;
+      function getWeek (date) {
+        var week
+        date = new Date(date)
+        if (date.getDay() == 0) week = '星期日'
+        if (date.getDay() == 1) week = '星期一'
+        if (date.getDay() == 2) week = '星期二'
+        if (date.getDay() == 3) week = '星期三'
+        if (date.getDay() == 4) week = '星期四'
+        if (date.getDay() == 5) week = '星期五'
+        if (date.getDay() == 6) week = '星期六'
+        return week
       }
     }
   }

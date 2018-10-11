@@ -13,8 +13,8 @@ export default {
   },
   data () {
     return {
-      goGack : false,
-      scrollTop : 0
+      goGack: false,
+      scrollTop: 0
     }
   },
   activated () {
@@ -23,11 +23,10 @@ export default {
   beforeCreate () {
 
   },
-  mounted(){
+  mounted () {
     this.$nextTick(function () {
-      //修改事件监听
+      // 修改事件监听
       window.addEventListener('scroll', this.scrollToTop)
-
     })
   },
   created () {
@@ -35,47 +34,34 @@ export default {
   },
   methods: {
     goBack () {
-
-      let time
-      let _that = this;
-      let timer = null;
-      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      let _that = this
+      let timer = null
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 
       clearTimeout(timer)
 
-      timer = setTimeout(function render(){
-
-        if( _that.scrollTop > 0 ){
-           _that.scrollTop -= 50
+      timer = setTimeout(function render () {
+        if (_that.scrollTop > 0) {
+          _that.scrollTop -= 50
           document.body.scrollTop = document.documentElement.scrollTop = _that.scrollTop
-          timer  = setTimeout(render)
-
-        }else {
+          timer = setTimeout(render)
+        } else {
           clearTimeout(timer)
           _that.goGack = false
         }
         // window.requestAnimationFrame();
-
-
-      },300);
-
-
-
-
-
-
+      }, 300)
     },
-    scrollToTop(){
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      if( scrollTop > 20 ){
-        this.goGack = true;
-      }else{
-        this.goGack = false;
+    scrollToTop () {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop > 20) {
+        this.goGack = true
+      } else {
+        this.goGack = false
       }
-　　
     }
   },
-  destroyed() {
+  destroyed () {
     window.removeEventListener('scroll', this.scrollToTop)
   }
 
