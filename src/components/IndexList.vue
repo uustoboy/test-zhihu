@@ -1,17 +1,15 @@
 <template>
   <div>
-
     <div v-if="latestList.top_stories">
-      <Swiper>
-        <div class="swiper-slide" v-for="item in latestList.top_stories" :key="item.id" slot="swiper-con" @click="Goto(item.id)">
-          <div clss="top-storiesList">
-            <img :src="item.image" class="top-storiesImg">
-            <p class="top-storiesTxt">{{item.title}}</p>
-          </div>
+      <Swiper swipeid="swipe" ref="swiper" :autoplay="3000" effect="slide">
+        <div @click="go(top.id)" v-for="top in latestList.top_stories" class="swiper-slide" slot="swiper-con">
+          <img :src="top.image">
+          <h3>{{top.title}}</h3>
         </div>
       </Swiper>
     </div>
     <div class="zh-h2">今日热闻</div>
+
     <ul class="zh-ul">
       <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in latestList.stories" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
@@ -40,7 +38,8 @@
 </template>
 
 <script>
-import Swiper from './swipe/Swiper'
+
+import Swiper from './swipe/Swipe'
 export default {
   name: 'IndexList',
   components: {
@@ -74,6 +73,7 @@ export default {
        if( scrollTop+winH > bodyH-10 && !this.scrollBtn ){
         this.scrollBtn = true
         let data = this.scrollData
+        console.log(data);
         this.axios.get(`/api/4/news/before/${data}`).then((resp) => {
 
           //that.beforeList = [...that.beforeList,...resp.data]
@@ -94,20 +94,36 @@ export default {
       if (strDate >= 0 && strDate <= 9) {
           strDate = "0" + strDate;
       }
-      var currentdate = date.getFullYear() + month + strDate;
+      var currentdate = `${date.getFullYear()}${month}${strDate}`;
+      console.log(currentdate)
       return currentdate;
     },
 
   },
   mounted(){
     window.addEventListener('scroll', this.scrollToTop)
-  },
-  created () {
 
+    let id = this.$route.query.id
+
+    if(id){
+      console.log('id:idsdsd');
+      this.axios.all([
+        this.axios.get(`/api/4/theme/${id}`)
+        ]).then(this.axios.spread((themeResp, reviewResp)=>{
+        this.latestList = themeResp.data
+        this.id = id
+        }))
+    }else{
       this.axios.get(`/api/4/news/latest`).then((latestResp) => {
         this.latestList = latestResp.data
-        console.log(this.latestList.top_stories)
+       // console.log(this.latestList.top_stories)
       })
+    }
+
+
+
+  },
+  created(){
 
   },
   filters: {

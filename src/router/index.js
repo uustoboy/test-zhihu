@@ -22,11 +22,11 @@ const store = createStore()
 // })
 
 export default new Router({
-  mode: 'hash',
+  mode: 'history',
   routes: [
     {
       path: '/',
-      redirect: 'AppIndex',
+      redirect: 'IndexList',
       name: 'AppIndex',
       component: AppIndex,
       meta: {
@@ -43,9 +43,34 @@ export default new Router({
           name: 'ThemesIndex',
           component: ThemesIndex
         }
-      ],
-      redirect: '/IndexList'
+      ]
+      // redirect: '/IndexList'
     },
+    // {
+    //   path: '/AppIndex',
+    //   name: 'AppIndex',
+    //   component: AppIndex,
+    //   meta: {
+    //     keepAlive: true
+    //   },
+    //   children: [
+    //     {
+    //       path: '/',
+    //       name: 'IndexList',
+    //       component: IndexList
+    //     },
+    //     {
+    //       path: '/ThemesIndex',
+    //       name: 'ThemesIndex',
+    //       component: ThemesIndex
+    //     }
+    //   ]
+    // },
+    // {
+    //   path: '/ThemesIndex',
+    //   name: 'ThemesIndex',
+    //   component: ThemesIndex
+    // },
     {
       path: '/DetailsPage/',
       name: 'DetailsPage',

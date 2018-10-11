@@ -1,7 +1,6 @@
 <template>
   <div>
-
-    <div v-if="themeList.description">
+    <div v-if="themeList.description" class="">
         <img :src="themeList.image" />
         <p>{{themeList.description}}</p>
     </div>
@@ -70,4 +69,54 @@ export default {
 <style lang="scss"  type="text/css">
 $global-unit:rem;
 
+
+
+
+.top-storiesTxt{
+  @include flex;
+  @include abs((l:0,b:8%));
+  @include flc(24,34,#fff);
+  @include tal;
+  @include pad(20);
+}
+.top-storiesImg{
+  @include wh(640,480);
+}
+.top-storiesList{
+  @include rel;
+}
+.zh-h2{
+  @include pad(20);
+  @include flc(22,24,#333);
+  @include tal;
+}
+.zh-ul{
+  @include w(95%);
+  @include mar(0 auto);
+
+}
+.zh-list{
+  @include pad(10);
+  @include flex;
+  @include bgc(#fff);
+  @include bdrs(10);
+  @include over;
+  @include mar(0 0 20 0);
+  @include box-s;
+  &:last-child{
+    @include mar(0);
+  }
+  .list-txt{
+    @include w(90%);
+    @include mr(5);
+    @include flc(22,36,#000);
+    @include tal;
+  }
+  .list-img{
+    @include wh(150,100);
+    img{
+      @include wh(100%);
+    }
+  }
+}
 </style>

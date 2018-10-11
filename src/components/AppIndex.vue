@@ -28,13 +28,13 @@ export default {
     return {
       homeList: {},
       themesList: {},
-      show:true
+      show: true
     }
   },
   beforeCreate () {
 
   },
-  mounted() {
+  mounted () {
     //console.log(this.$el)
     // this.updateCountAsync({
     //   num : 5,

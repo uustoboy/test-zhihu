@@ -48,7 +48,7 @@ export default {
     ...mapState(['isThemes'])
   },
   created () {
-
+    console.log(1111);
   },
   methods: {
     ...mapMutations(['updateThemes']),
@@ -58,11 +58,13 @@ export default {
     goThemes(id){
       console.log(id)
       this.$router.push({
-        name: '/AppIndex/ThemesIndex',
+        path: '/IndexList',
         query: {
           id: id
         }
       })
+      this.$router.replace('/IndexList')
+      this.close()
     }
   }
 
