@@ -2,7 +2,7 @@
   <div>
     <div v-if="latestList.top_stories">
       <Swiper swipeid="swipe" ref="swiper" :autoplay="3000" effect="slide">
-        <div @click="go(top.id)" v-for="top in latestList.top_stories" class="swiper-slide" slot="swiper-con">
+        <div @click="go(top.id)" v-for="top in latestList.top_stories" v-bind:key="top.id" class="swiper-slide" slot="swiper-con">
           <img :src="top.image">
           <h3>{{top.title}}</h3>
         </div>
@@ -134,13 +134,13 @@ export default {
       function getWeek (date) {
         var week
         date = new Date(date)
-        if (date.getDay() == 0) week = '星期日'
-        if (date.getDay() == 1) week = '星期一'
-        if (date.getDay() == 2) week = '星期二'
-        if (date.getDay() == 3) week = '星期三'
-        if (date.getDay() == 4) week = '星期四'
-        if (date.getDay() == 5) week = '星期五'
-        if (date.getDay() == 6) week = '星期六'
+        if (date.getDay() === 0) week = '星期日'
+        if (date.getDay() === 1) week = '星期一'
+        if (date.getDay() === 2) week = '星期二'
+        if (date.getDay() === 3) week = '星期三'
+        if (date.getDay() === 4) week = '星期四'
+        if (date.getDay() === 5) week = '星期五'
+        if (date.getDay() === 6) week = '星期六'
         return week
       }
     }

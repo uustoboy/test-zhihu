@@ -33,7 +33,6 @@ exports.cssLoaders = function (options) {
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
-
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -52,7 +51,6 @@ exports.cssLoaders = function (options) {
       //   })
       // }
     }
-
 
 
     // Extract CSS when that option is specified

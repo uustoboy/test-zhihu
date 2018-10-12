@@ -12,33 +12,28 @@
 <script>
 import {
   mapState,
-  mapGetters,
-  mapActions,
   mapMutations
 } from 'vuex'
 export default {
   name: 'App',
   computed: {
-    ...mapState(['isThemes','honePage'])
+    ...mapState(['isThemes', 'honePage'])
   },
   methods: {
     ...mapMutations(['updateThemes']),
-    toggleThemes(){
-      this.$store.commit('updateThemes',!this.isThemes)
+    toggleThemes () {
+      this.$store.commit('updateThemes', !this.isThemes)
     },
-    goBack(){
-       console.log(1);
+    goBack () {
+      console.log(1)
 
       if (window.history.length <= 1) {
-
-          this.$router.push({path:'/'})
-          this.$store.commit('updateHomePage',true)
-          return false
+        this.$router.push({path: '/'})
+        this.$store.commit('updateHomePage', true)
+        return false
       } else {
-          this.$router.go(-1)
-
+        this.$router.go(-1)
       }
-
     }
 
   }

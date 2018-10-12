@@ -14,37 +14,37 @@ export default {
   name: 'Swiper',
   props: {
     swipeid: {
-			type: String,
-			default: ''
-		},
-		effect: {
-			type: String,
-			default: 'slide'
-		},
-		loop: {
-			type: Boolean,
-			default: false
-		},
-		direction: {
-			type: String,
-			default: 'horizontal'
-		},
-		pagination: {
-			type: Boolean,
-			default: true
-		},
-		autoplay: {
-			type: Number,
-			default: 5000,
-		},
-		paginationType: {
-			type: String,
-			default: 'bullets'
-		}
+      type: String,
+      default: ''
+    },
+    effect: {
+      type: String,
+      default: 'slide'
+    },
+    loop: {
+      type: Boolean,
+      default: false
+    },
+    direction: {
+      type: String,
+      default: 'horizontal'
+    },
+    pagination: {
+      type: Boolean,
+      default: true
+    },
+    autoplay: {
+      type: Number,
+      default: 5000
+    },
+    paginationType: {
+      type: String,
+      default: 'bullets'
+    }
   },
   data () {
     return {
-      dom:""
+      dom: ''
     }
   },
   activated () {
@@ -53,27 +53,27 @@ export default {
   beforeCreate () {
 
   },
-  mounted() {
-		var That = this;
-		new Swiper('.' + That.swipeid, {
-			//循环
-			loop: That.loop,
-			//分页器
-			pagination: '.swiper-pagination',
-			//分页类型
-			paginationType: That.paginationType, //fraction,progress,bullets
-			//自动播放
-			// autoplay: That.autoplay,
-			autoplay: That.autoplay,
-			//方向
-			direction: That.direction,
-			//特效
-			effect: That.effect, //slide,fade,coverflow,cube
-			autoplayDisableOnInteraction: false,
-			observer: true, //修改swiper自己或子元素时，自动初始化swiper
-			observeParents: true //修改swiper的父元素时，自动初始化swiper
-		})
-	},
+  mounted () {
+    var That = this
+    this.dom = new Swiper('.' + That.swipeid, {
+      // 循环
+      loop: That.loop,
+      // 分页器
+      pagination: '.swiper-pagination',
+      // 分页类型
+      paginationType: That.paginationType, // fraction,progress,bullets
+      // 自动播放
+      // autoplay: That.autoplay,
+      autoplay: That.autoplay,
+      // 方向
+      direction: That.direction,
+      // 特效
+      effect: That.effect, // slide,fade,coverflow,cube
+      autoplayDisableOnInteraction: false,
+      observer: true, // 修改swiper自己或子元素时，自动初始化swiper
+      observeParents: true // 修改swiper的父元素时，自动初始化swiper
+    })
+  },
   created () {
 
   },
@@ -86,7 +86,7 @@ export default {
 @import './swiper.min';
 $global-unit:rem;
 .swiper-pagination-bullet-active {
-	background: #fff;
+  @include bgc(#fff);
 }
 
 .swiper-slide{

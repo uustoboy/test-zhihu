@@ -13,8 +13,8 @@ import createStore from '../store/store'
 Vue.use(Vuex)
 Vue.use(Router)
 
-const store = createStore()
-
+// const store = createStore()
+createStore()
 // store.registerModule('c',{
 //   state:{
 //     text:3
@@ -46,31 +46,6 @@ export default new Router({
       ]
       // redirect: '/IndexList'
     },
-    // {
-    //   path: '/AppIndex',
-    //   name: 'AppIndex',
-    //   component: AppIndex,
-    //   meta: {
-    //     keepAlive: true
-    //   },
-    //   children: [
-    //     {
-    //       path: '/',
-    //       name: 'IndexList',
-    //       component: IndexList
-    //     },
-    //     {
-    //       path: '/ThemesIndex',
-    //       name: 'ThemesIndex',
-    //       component: ThemesIndex
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: '/ThemesIndex',
-    //   name: 'ThemesIndex',
-    //   component: ThemesIndex
-    // },
     {
       path: '/DetailsPage/',
       name: 'DetailsPage',

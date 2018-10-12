@@ -21,8 +21,6 @@
 <script>
 import {
   mapState,
-  mapGetters,
-  mapActions,
   mapMutations
 } from 'vuex'
 export default {
@@ -58,12 +56,11 @@ export default {
     goThemes (id) {
       console.log(id)
       this.$router.push({
-        path: '/IndexList',
+        path: '/ThemesIndex',
         query: {
           id: id
         }
       })
-      this.$router.replace('/IndexList')
       this.close()
     }
   }

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="themeList.description" class="">
+    <div v-if="themeList.description" class="zh-caption">
         <img :src="themeList.image" />
-        <p>{{themeList.description}}</p>
+        <p class="zh-captionTxt">{{themeList.description}}</p>
     </div>
-    <div v-if="themeList.editors">
+    <div v-if="themeList.editors" class="zh-compile">
       主编：
-      <span v-for="item in themeList.editors" :key="item.id" >
+      <span v-for="item in themeList.editors" :key="item.id" class="zh-compilePic">
         <img :src="item.avatar">
       </span>
     </div>
@@ -25,10 +25,7 @@
 
 <script>
 import {
-  mapState,
-  mapGetters,
-  mapActions,
-  mapMutations
+  mapState
 } from 'vuex'
 export default {
   name: 'ThemesIndex',
@@ -68,6 +65,33 @@ export default {
 </script>
 <style lang="scss"  type="text/css">
 $global-unit:rem;
+
+
+.zh-caption{
+  @include rel();
+  @include wh(100%,300);
+  img{
+    @include wh(100%,300);
+  }
+  .zh-captionTxt{
+    @include abs((b:10,l:0,w:100%,z:1));
+    @include flc(24,32,#fff);
+    @include box-sz();
+    @include pad(20);
+    @include tal;
+  }
+}
+
+.zh-compile{
+  @include tal;
+  @include pad(10);
+  @include flc(24,32,#666);
+  img{
+    @include wh(35);
+    @include mar(0 5 0 0);
+    @include bdrs(50%);
+  }
+}
 
 .top-storiesTxt{
   @include flex;
