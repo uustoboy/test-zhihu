@@ -2,7 +2,7 @@
   <div>
     <div v-if="latestList.top_stories">
       <Swiper swipeid="swipe" ref="swiper" :autoplay="3000" effect="slide">
-        <div @click="go(top.id)" v-for="top in latestList.top_stories" v-bind:key="top.id" class="swiper-slide" slot="swiper-con">
+        <div @click="Goto(top.id)" v-for="top in latestList.top_stories" v-bind:key="top.id" class="swiper-slide" slot="swiper-con">
           <img :src="top.image">
           <h3>{{top.title}}</h3>
         </div>
@@ -13,7 +13,7 @@
     <ul class="zh-ul">
       <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in latestList.stories" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
-              {{ item.title }}
+            {{ item.title }}
         </p>
         <div class="list-img" v-if="item.images">
           <img :src="item.images"/>

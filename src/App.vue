@@ -19,14 +19,21 @@ export default {
   computed: {
     ...mapState(['isThemes', 'honePage'])
   },
+  watch: {
+    $route (now, old) {
+      if (now.path === '/IndexList' || now.path === '/ThemesIndex') {
+        this.$store.commit('updateHomePage', true)
+      } else {
+        this.$store.commit('updateHomePage', false)
+      }
+    }
+  },
   methods: {
     ...mapMutations(['updateThemes']),
     toggleThemes () {
       this.$store.commit('updateThemes', !this.isThemes)
     },
     goBack () {
-      console.log(1)
-
       if (window.history.length <= 1) {
         this.$router.push({path: '/'})
         this.$store.commit('updateHomePage', true)

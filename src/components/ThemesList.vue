@@ -6,7 +6,7 @@
         </transition>
          <transition name="themes">
             <ul class="themes-ul">
-              <li class="themes-list">
+              <li class="themes-list" @click="goIndex()">
                 首页
               </li>
               <li class="themes-list" v-for="item in themesLists" :key="item.id" @click="goThemes(item.id)">
@@ -46,21 +46,29 @@ export default {
     ...mapState(['isThemes'])
   },
   created () {
-    console.log(1111)
+
   },
   methods: {
     ...mapMutations(['updateThemes']),
     close () {
       this.$store.commit('updateThemes', false)
     },
+    goIndex () {
+      this.$router.push({
+        path: '/IndexList'
+      })
+      this.close()
+    },
     goThemes (id) {
       console.log(id)
+      this.$router.go(0)
       this.$router.push({
         path: '/ThemesIndex',
         query: {
           id: id
         }
       })
+
       this.close()
     }
   }

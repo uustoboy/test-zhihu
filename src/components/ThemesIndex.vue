@@ -13,7 +13,7 @@
     <ul class="zh-ul">
       <li :class="item.images ? 'zh-list' : 'zh-list2'" v-for="item in themeList.stories" :key="item.id" @click="Goto(item.id)">
         <p class="list-txt">
-              {{ item.title }}
+          {{ item.title }}
         </p>
         <div class="list-img" v-if="item.images">
           <img :src="item.images"/>
@@ -48,17 +48,35 @@ export default {
   computed: {
     ...mapState(['honePage'])
   },
-  created () {
+  mounted () {
     let id = this.$route.query.id
-    this.axios.all([
-      this.axios.get(`/api/4/theme/${id}`)
-    ]).then(this.axios.spread((themeResp, reviewResp) => {
-      this.themeList = themeResp.data
-      this.id = id
-    }))
+    if (this.$route.query.id) {
+      this.axios.all([
+        this.axios.get(`/api/4/theme/${id}`)
+      ]).then(this.axios.spread((themeResp, reviewResp) => {
+        this.themeList = themeResp.data
+        this.id = id
+      }))
+    } else {
+      id = 13
+      this.axios.all([
+        this.axios.get(`/api/4/theme/${id}`)
+      ]).then(this.axios.spread((themeResp, reviewResp) => {
+        this.themeList = themeResp.data
+        this.id = id
+      }))
+    }
   },
   methods: {
-
+    Goto (id) {
+      this.$router.push({
+        name: 'DetailsPage',
+        query: {
+          id: id
+        }
+      })
+      // this.$store.commit('updateHomePage', false)
+    }
   }
 
 }
@@ -116,7 +134,7 @@ $global-unit:rem;
   @include mar(0 auto);
 
 }
-.zh-list{
+.zh-list,.zh-list2{
   @include pad(10);
   @include flex;
   @include bgc(#fff);
