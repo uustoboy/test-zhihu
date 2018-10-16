@@ -57,7 +57,7 @@ export default {
     Goto (id) {
       this.$router.push({
         name: 'DetailsPage',
-        query: {
+        params: {
           id: id
         }
       })

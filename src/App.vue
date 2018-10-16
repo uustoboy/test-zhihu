@@ -21,7 +21,7 @@ export default {
   },
   watch: {
     $route (now, old) {
-      if (now.path === '/IndexList' || now.path === '/ThemesIndex') {
+      if (now.path === '/IndexList' || now.path === '/ThemesIndex/:id') {
         this.$store.commit('updateHomePage', true)
       } else {
         this.$store.commit('updateHomePage', false)
@@ -44,6 +44,7 @@ export default {
     }
 
   }
+
 }
 </script>
 

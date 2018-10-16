@@ -39,7 +39,8 @@ export default {
 
   },
   created () {
-    let id = this.$route.query.id
+    let id = this.$route.params.id
+    console.info(id);
     this.axios.all([
       this.axios.get(`/api/4/news/${id}`),
       this.axios.get(`/api/4/story-extra/${id}`)

@@ -3,13 +3,15 @@
 import './assets/js/hotcss.min'
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import BackTop from './components/BackTop'
 
-import store from './store/store'
+import createStore from './store/store'
+import createRouter from './router/index'
 
+const store = createStore()
+const router = createRouter()
 Vue.use(VueAxios, axios)
 // Vue.prototype.$axios = axios
 
@@ -34,3 +36,39 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+
+
+router.beforeEach((to, from, next) => {
+  // ...
+
+  console.log(to)
+  console.log(1)
+  next()
+})
+
+router.afterEach((to, from) => {
+  // ...
+  console.log(to)
+  console.log(3)
+})
+
+router.beforeResolve((to, from, next) => {
+  // ...
+  console.log(to)
+  console.log(2)
+  next()
+})
+
+// router.beforeRouteEnter((to, from, next) => {
+//   // ...
+//   console.log(to)
+//   next()
+// })
+
+
+// router.beforeRouteUpdate((to, from, next) => {
+//   // ...
+//   console.log('routeUpdate')
+//   next()
+// })

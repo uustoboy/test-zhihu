@@ -49,8 +49,8 @@ export default {
     ...mapState(['honePage'])
   },
   mounted () {
-    let id = this.$route.query.id
-    if (this.$route.query.id) {
+    let id = this.$route.params.id
+    if (this.$route.params.id) {
       this.axios.all([
         this.axios.get(`/api/4/theme/${id}`)
       ]).then(this.axios.spread((themeResp, reviewResp) => {
@@ -71,7 +71,7 @@ export default {
     Goto (id) {
       this.$router.push({
         name: 'DetailsPage',
-        query: {
+        params: {
           id: id
         }
       })

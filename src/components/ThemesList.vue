@@ -60,11 +60,11 @@ export default {
       this.close()
     },
     goThemes (id) {
-      console.log(id)
-      this.$router.go(0)
+      // console.log(id)
+      // this.$router.go(0)
       this.$router.push({
-        path: '/ThemesIndex',
-        query: {
+        name: 'ThemesIndex',
+        params: {
           id: id
         }
       })
